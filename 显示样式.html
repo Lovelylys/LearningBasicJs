@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>显示样式练习</title>
+        <style>
+            #box1{
+                width: 200px;
+                height: 100px;
+                background-color: red;
+            }
+        </style>
+        <script>
+            window.onload = function() {
+                var box1 = document.getElementById("box1");
+                alert(getStyle(box1, "backgroundColor"));
+            }
+            function getStyle(obj, name) {
+                if(getComputedStyle){
+                    return getComputedStyle(obj, null)[name];
+                }else {
+                    alert("111");
+                    return obj.currentStyle[name];
+                }
+            }
+        </script>
+    </head>
+    <body>
+        <div id="box1"></div>
+    </body>
+</html>

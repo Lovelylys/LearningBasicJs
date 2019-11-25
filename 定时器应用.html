@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>定时器应用1</title>
+        <style>
+            *{
+                margin: 0px;
+                padding: 0px;
+            }
+            #box1{
+                width: 100px;
+                height: 100px;
+                background-color: red;
+                position: absolute;
+            }
+        </style>
+        <script>
+            window.onload = function() {
+                var box1 = document.getElementById("box1");
+                var btn1 = document.getElementById("btn1");
+                function getStyle(obj, name) {
+                    if(getComputedStyle){
+                        return getComputedStyle(obj, null)[name];
+                    }else {
+                        alert("111");
+                        return obj.currentStyle[name];
+                    }
+                }
+                var dir = 39;
+                var speed = 10;
+                var timer;
+                btn1.onclick = function() {
+                    clearInterval(timer);
+                    timer = setInterval(function(){
+                        var oldValue = getStyle(box1, "left");
+                        var newValue = parseInt(oldValue) + speed;
+                        if(newValue >= 800){
+                            newValue = 800;
+                        }
+                        
+                        box1.style.left = newValue + "px";
+                        if(newValue == 800){
+                            clearInterval(timer);
+                        }
+                    },30)
+                }
+
+                
+                document.onkeydown = function(event) {
+                    
+                }
+            }
+        </script>
+    </head>
+    <body>
+        <button id="btn1">点击一下</button>
+        <div id="box2" style="width: 0;height: 1000px;border-left: 1px black solid;position: absolute;left: 800px;top: 0px"></div>
+        <div id="box1"></div>
+    </body>
+</html>

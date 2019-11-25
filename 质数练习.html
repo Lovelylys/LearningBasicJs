@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>质数练习</title>
+    </head>    
+    <body>
+        <script>
+            var num = prompt("请输入一个数字");
+            console.time("test");
+            if (num < 1) {
+                alert("数字不合法");
+            } else {
+                var flag = true;
+                for (var i = 2; i < Math.sqrt(num); i++) {
+                    if (num % i == 0) {
+                        flag = false;
+                        break;
+                    }
+                }
+            }
+            if (flag) {
+                alert(num + "是质数");
+            } else {
+                alert(num + "不是质数");
+            }
+            console.timeEnd("test");
+        </script>
+    </body>
+</html>

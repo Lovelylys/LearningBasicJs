@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>轮播图片</title>
+        <style>
+            *{
+                margin: 0px;
+                padding: 0px;
+            }
+            #outer{
+                width: 520px;
+                height: 333px;
+                background-color: yellowGreen;
+                margin: 50px auto;
+                padding: 10px 0px;
+                position: relative;
+                overflow: hidden;
+            }
+            #imgList{
+                list-style: none;
+                /* width: 2600px; */
+                position: absolute;
+                /* left: -520px; */
+            }
+            #imgList li{
+                float: left;
+                margin: 0px 10px;
+            }
+            #navDiv{
+                position: absolute;
+                bottom: 15px;
+                /* left: 197px; */
+            }
+            #navDiv a{
+                width: 15px;
+                height: 15px;
+                background-color: red;
+                float: left;
+                margin: 0px 5px;
+                opacity: 0.5;
+                filter: alpha(opacity=50);
+            }
+            #navDiv a:hover{
+                background-color: black;
+            }
+        </style>
+        <script src="tools.js"></script>
+        <script>
+            window.onload = function() {
+                var imgList = document.getElementById("imgList");
+                var imgArray = document.getElementsByTagName("img");
+                imgList.style.width = 520 * imgArray.length + "px";
+
+                var navDiv = document.getElementById("navDiv");
+                navDiv.style.left = (outer.offsetWidth - navDiv.offsetWidth)/2 + "px";
+                
+                var allA = document.getElementsByTagName("a");
+                var index = 0;
+                for(var i = 0; i < allA.length; i++) {
+                    allA[i].num = i;
+                    allA[i].onclick =function() {
+                        clearInterval(timer);
+                        index = this.num;
+                        // imgList.style.left = -520 * index + "px";
+                        setA();
+                        move(imgList,"left",-520*index,20, function(){
+                            autoChange();
+                        });
+                    }
+                }
+                autoChange();
+
+                function setA() {
+                    if(index >= imgArray.length-1) {
+                        index = 0;
+
+                        imgList.style.left = 0;
+                    }
+                    for(var j = 0; j < allA.length; j++) {
+                            allA[j].style.backgroundColor = "";
+                    }
+                    allA[index].style.backgroundColor = "black";
+                }
+
+                var timer;
+                function autoChange() {
+                    timer = setInterval(function() {
+                        index++;
+                        index %= imgArray.length;
+
+                        move(imgList,"left",-520*index,20, function(){
+                            setA();
+                        });
+                    }, 1000);
+                }
+            }
+        </script>
+    </head>
+    <body>
+        <div id="outer">
+            <ul id="imgList">
+                <li><img src="images/1.jpg"/></li>
+                <li><img src="images/2.jpg"/></li>
+                <li><img src="images/3.jpg"/></li>
+                <li><img src="images/4.jpg"/></li>
+                <li><img src="images/5.jpg"/></li>
+                <li><img src="images/1.jpg"/></li>
+            </ul>
+            <div id="navDiv">
+                <a href="javascrip:;"></a>
+                <a href="javascrip:;"></a>
+                <a href="javascrip:;"></a>
+                <a href="javascrip:;"></a>
+                <a href="javascrip:;"></a>
+            </div>
+        </div>
+    </body>
+</html>
